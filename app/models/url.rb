@@ -1,7 +1,7 @@
 class Url < ApplicationRecord
     before_validation :generate_short_url, on: :create, unless: -> { short_url.present? }
   
-    validates :original_url, presence: true, uniqueness: true
+    validates :original_url, presence: true, uniqueness: true, format: URI::DEFAULT_PARSER.make_regexp(%w[http https])
     validates :short_url, uniqueness: true, format: { with: /\A[a-zA-Z0-9]+\z/, message: 'only allows alphanumeric characters' }
   
     private
