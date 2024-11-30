@@ -1,0 +1,29 @@
+<h1>Shorten Your URL</h1>
+
+<%= form_with model: @url, local: true do |form| %>
+  <% if @url.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@url.errors.count, "error") %> prohibited this URL from being saved:</h2>
+      <ul>
+        <% @url.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :original_url, "Enter the original URL" %><br>
+    <%= form.text_field :original_url %>
+  </div>
+
+  <div>
+    <%= form.label :short_url, "Custom Short URL (Optional)" %><br>
+    <%= form.text_field :short_url %>
+    <p>Only alphanumeric characters are allowed.</p>
+  </div>
+
+  <div>
+    <%= form.submit "Shorten and Redirect" %>
+  </div>
+<% end %>
